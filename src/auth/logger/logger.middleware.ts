@@ -8,8 +8,14 @@ export class AuthLoggingMiddleware implements NestMiddleware {
     const { method, originalUrl } = req;
     const startTime = Date.now();
 
-    // Registra la solicitud entrante
-    console.log(`[Request] ${method} ${originalUrl}`);
+    if (req.body) {
+      console.log(`[Request] ${method} ${originalUrl} se logeo el user con email ${req.body.email}`);
+    } else {
+
+      // Registra la solicitud entrante
+      console.log(`[Request] ${method} ${originalUrl}`);
+    }
+
 
     // Registra la respuesta cuando se completa
     res.on('finish', () => {

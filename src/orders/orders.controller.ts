@@ -15,7 +15,7 @@ import { Request } from 'express';
 import { AuthGuard } from '../guards/auth/auth.guard';
 import { User } from '../decorators/user.decorator';
 
-@ApiTags('orders')
+@ApiTags('Órdenes')
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {
@@ -24,7 +24,7 @@ export class OrdersController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Crear una nueva orden' })
+  @ApiOperation({ summary: 'Crear una nueva orden (el total se calcula automáticamente)' })
   @ApiResponse({ status: 201, description: 'Orden creada exitosamente.' })
   @ApiResponse({ status: 400, description: 'Datos inválidos.' })
   @ApiResponse({ status: 401, description: 'No autorizado.' })
@@ -36,7 +36,6 @@ export class OrdersController {
         userId: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
         productId: 'c9bf9e57-1685-4c89-bafb-ff5af830be8a',
         quantity: 2,
-        total: 39.98,
       },
     },
   })
@@ -51,20 +50,20 @@ export class OrdersController {
   @ApiOperation({ summary: 'Obtener las órdenes del usuario autenticado' })
   @ApiResponse({ status: 200, description: 'Lista de órdenes obtenida.' })
   @ApiResponse({ status: 401, description: 'No autorizado.' })
-  findAllByUser(@User() user: { sub: string }) {
+  findAll(@User() user: { sub: string }) {
     const userId = user.sub; // Obtiene el ID del usuario autenticado
     return this.ordersService.findAllByUser(userId);
   }
 
-  @Get()
-  @UseGuards(AuthGuard)
-  @ApiBearerAuth()
-  @ApiOperation({ summary: 'Obtener las órdenes del usuario autenticado' })
-  @ApiResponse({ status: 200, description: 'Lista de órdenes obtenida.' })
-  @ApiResponse({ status: 401, description: 'No autorizado.' })
-  findAll() {
-    return this.ordersService.findAll();
-  }
+  // @Get()
+  // @UseGuards(AuthGuard)
+  // @ApiBearerAuth()
+  // @ApiOperation({ summary: 'Obtener todas las órdenes' })
+  // @ApiResponse({ status: 200, description: 'Lista de órdenes obtenida.' })
+  // @ApiResponse({ status: 401, description: 'No autorizado.' })
+  // findAll() {
+  //   return this.ordersService.findAll();
+  // }
 
   @Get(':id')
   @UseGuards(AuthGuard)

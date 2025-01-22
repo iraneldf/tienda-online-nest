@@ -18,7 +18,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiQuery, ApiTags, ApiBody } 
 import { AuthGuard } from '../guards/auth/auth.guard';
 import { RolesGuard } from '../guards/auth/roles.guard';
 
-@ApiTags('products')
+@ApiTags('Productos')
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
@@ -48,7 +48,7 @@ export class ProductsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Obtener todos los productos' })
+  @ApiOperation({ summary: 'Obtener todos los productos paginados' })
   @ApiResponse({ status: 200, description: 'Lista de productos obtenida.' })
   @ApiQuery({ name: 'page', required: false, type: Number, description: 'Número de página' })
   @ApiQuery({ name: 'limit', required: false, type: Number, description: 'Límite de productos por página' })

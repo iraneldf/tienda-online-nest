@@ -10,14 +10,14 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) {
+  }
 
   async register(createUserDto: CreateUserDto) {
-    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
-    const user = await this.usersService.create({
-      ...createUserDto,
-      password: hashedPassword,
-    });
+    // const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+    const user = await this.usersService.create(
+      createUserDto,
+    );
     return user;
   }
 

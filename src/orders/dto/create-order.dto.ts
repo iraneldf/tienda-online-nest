@@ -19,8 +19,8 @@ export class CreateOrderDto {
   @IsNotEmpty({ message: 'La cantidad no puede estar vacía.' })
   quantity: number;
 
-  @IsNumber({}, { message: 'El total debe ser un número.' })
-  @IsPositive({ message: 'El total debe ser un valor positivo.' })
-  @IsNotEmpty({ message: 'El total no puede estar vacío.' })
-  total: number;
+  // @IsNumber({}, { message: 'El total debe ser un número.' })
+  // @IsPositive({ message: 'El total debe ser un valor positivo.' })
+  // @IsNotEmpty({ message: 'El total no puede estar vacío.' })
+  // total: number;
 }

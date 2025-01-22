@@ -14,7 +14,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../guards/auth/auth.guard';
 
-@ApiTags('users')
+@ApiTags('Usuarios')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {
@@ -33,6 +33,7 @@ export class UsersController {
         name: 'Nombre del usuario',
         email: 'correo@example.com',
         password: 'contraseñaSegura123',
+        role: 'admin',
       },
     },
   })
@@ -72,6 +73,7 @@ export class UsersController {
       example: { // Usa "example" para mostrar un ejemplo en el campo raw
         name: 'Nombre del usuario',
         email: 'correo@example.com',
+        role: 'admin',
         password: 'contraseñaSegura123',
       },
     },

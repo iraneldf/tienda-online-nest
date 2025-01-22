@@ -12,9 +12,13 @@ export class OrdersService {
     const product = await this.prisma.product.findUnique({
       where: { id: createOrderDto.productId },
     });
+
     if (!product) {
       throw new NotFoundException('Producto no encontrado');
     }
+
+    // Calcula el total (precio del producto * cantidad)
+    const total = product.price * createOrderDto.quantity;
 
     // Crea la orden
     return this.prisma.order.create({
@@ -22,7 +26,7 @@ export class OrdersService {
         userId,
         productId: createOrderDto.productId,
         quantity: createOrderDto.quantity,
-        total: createOrderDto.total,
+        total, // Usa el total calculado
       },
     });
   }
