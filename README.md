@@ -27,7 +27,13 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+## Crear base de datos
 
+```bash
+# migraciones
+$ npx prisma migrate dev --name init
+```
+t
 ## Ejecutar pruebas
 
 ```bash
@@ -72,4 +78,12 @@ $ git clone https://github.com/iraneldf/tienda-online-nest.git
 # moverse a la carpeta
 $ cd tienda-online-nest
 
+```
+
+## Detalles
+
+```bash
+para crear un user con rol admin de ser desde el endpoint: 
+POST /users 
+que permite especificar el rol (tiene puesto un ejemplo con rol admin)
 ```
