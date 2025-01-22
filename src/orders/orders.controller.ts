@@ -55,15 +55,12 @@ export class OrdersController {
     return this.ordersService.findAllByUser(userId);
   }
 
-  // @Get()
-  // @UseGuards(AuthGuard)
-  // @ApiBearerAuth()
-  // @ApiOperation({ summary: 'Obtener todas las órdenes' })
-  // @ApiResponse({ status: 200, description: 'Lista de órdenes obtenida.' })
-  // @ApiResponse({ status: 401, description: 'No autorizado.' })
-  // findAll() {
-  //   return this.ordersService.findAll();
-  // }
+  @Get('/all')
+  @ApiOperation({ summary: 'Obtener todas las órdenes' })
+  @ApiResponse({ status: 200, description: 'Lista de órdenes obtenida.' })
+  findAllNoUser() {
+    return this.ordersService.findAll();
+  }
 
   @Get(':id')
   @UseGuards(AuthGuard)
@@ -71,8 +68,8 @@ export class OrdersController {
   @ApiOperation({ summary: 'Obtener una orden por ID' })
   @ApiResponse({ status: 200, description: 'Orden encontrada.' })
   @ApiResponse({ status: 404, description: 'Orden no encontrada.' })
-  findOne(id: string, userId: string, userRole: string) {
-    return this.ordersService.findOne(id, userId, userRole);
+  findOne(@Param('id') id: string) {
+    return this.ordersService.findOne(id);
   }
 
   @Delete(':id')

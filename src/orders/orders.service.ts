@@ -42,18 +42,13 @@ export class OrdersService {
     return this.prisma.order.findMany();
   }
 
-  async findOne(id: string, userId: string, userRole: string) {
+  async findOne(id: string) {
     const order = await this.prisma.order.findUnique({
       where: { id },
       include: { product: true }, // Incluye los detalles del producto
     });
     if (!order) {
       throw new NotFoundException('Orden no encontrada');
-    }
-
-    // Verifica si el usuario es el dueño de la orden o un administrador
-    if (order.userId !== userId && userRole !== 'admin') {
-      throw new ForbiddenException('No tienes permiso para acceder a esta orden');
     }
 
     return order;
